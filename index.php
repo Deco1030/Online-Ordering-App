@@ -40,17 +40,18 @@ if ($page === null) {
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>Online Ordering & Shipment Tracking</title>
 
-      <!-- Bootstrap 5 + Bootstrap Icons -->
+      <!-- Bootstrap 5 (Icons removed for lighter payload) -->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
 
       <link rel="stylesheet" href="<?php echo Security::e($basePath); ?>/style.css" />
+      <link rel="stylesheet" href="<?php echo Security::e($basePath); ?>/landing-light-fix.css" />
     </head>
     <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+      <a class="skip-link" href="#main">Skip to content</a>
 
     <!-- Navbar (fixed, responsive) -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" aria-label="Main navigation">
+    <nav class="navbar navbar-expand-lg fixed-top" aria-label="Main navigation">
+
       <div class="container">
         <a class="navbar-brand fw-semibold" href="<?php echo Security::e($homeHref); ?>">
           <span class="brand-mark me-2">🚚</span>
@@ -195,7 +196,8 @@ if ($page === null) {
       </div>
     </header>
 
-    <main id="main">
+    <main id="main" class="landing-fix">
+
       <!-- Services -->
       <section id="services" class="section">
         <div class="container">
@@ -593,9 +595,9 @@ if ($page === null) {
         </div>
       </section>
 
-      <!-- Scripts -->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-      <script src="<?php echo Security::e($basePath); ?>/script.js"></script>
+      <!-- Scripts (defer for lighter/ faster first paint) -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+      <script src="<?php echo Security::e($basePath); ?>/script.js" defer></script>
     </body>
     </html>
     <?php
@@ -606,7 +608,10 @@ if ($page === null) {
 
 // If a page parameter is provided, use the app dispatcher.
 // Provide helpers to included pages.
-function e(mixed $v): string { return Security::e($v); }
+if (!function_exists('e')) {
+    function e(mixed $v): string { return Security::e($v); }
+}
+
 
 $allowedPublic = [
     'auth/login',
@@ -624,12 +629,24 @@ if (!$u && !in_array($page, $allowedPublic, true)) {
 
 $map = [
     'admin_dashboard' => __DIR__ . '/admin_dashboard.php',
+    'manage_users' => __DIR__ . '/manage_users.php',
+
+
+    // Admin dashboard AJAX endpoints
+    'dashboard_data' => __DIR__ . '/dashboard_data.php',
+    'dashboard_charts' => __DIR__ . '/dashboard_charts.php',
+
     'client_dashboard' => __DIR__ . '/client_dashboard.php',
+
     'client_place_order' => __DIR__ . '/client_place_order.php',
     'client_my_orders' => __DIR__ . '/my_orders.php',
 
+
+
+
     // Optional pages (only if you add corresponding files later)
     'client_track' => __DIR__ . '/client_track.php',
+
     'client_notifications' => __DIR__ . '/client_notifications.php',
     'client_invoices' => __DIR__ . '/client_invoices.php',
     'client_profile' => __DIR__ . '/client_profile.php',

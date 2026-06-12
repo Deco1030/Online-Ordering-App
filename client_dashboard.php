@@ -263,6 +263,12 @@ function statusBadge(string $status): array
     </a>
 
     <div class="d-flex align-items-center gap-2 ms-auto">
+      <!-- Theme toggle -->
+      <button class="btn btn-ghost text-white" type="button" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle theme">
+        <i class="bi bi-moon-stars" id="themeToggleIcon"></i>
+      </button>
+
+
       <!-- Notifications dropdown -->
       <div class="dropdown">
         <button class="btn btn-ghost text-white position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications">
@@ -788,6 +794,47 @@ $prev = ((int)$page) - 1;
 </script>
 
 <script>
+  // Theme toggle + persistence
+  (function(){
+    const root = document.documentElement;
+    const body = document.body;
+    const toggleBtn = document.getElementById('themeToggle');
+    const icon = document.getElementById('themeToggleIcon');
+
+    function setTheme(theme){
+      if(theme === 'light'){
+        root.setAttribute('data-theme','light');
+        body.setAttribute('data-theme','light');
+        // Toggle icon (Bootstrap icons)
+        if(icon){ icon.classList.remove('bi-moon-stars'); icon.classList.add('bi-sun'); }
+      } else {
+        root.removeAttribute('data-theme');
+        body.removeAttribute('data-theme');
+        if(icon){ icon.classList.remove('bi-sun'); icon.classList.add('bi-moon-stars'); }
+      }
+
+      try{ localStorage.setItem('otx_theme', theme); }catch(e){}
+    }
+
+    function getPreferredTheme(){
+      try{
+        const saved = localStorage.getItem('otx_theme');
+        if(saved === 'light' || saved === 'dark') return saved;
+      }catch(e){}
+      return (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+    }
+
+    const initial = getPreferredTheme();
+    setTheme(initial);
+
+    if(toggleBtn){
+      toggleBtn.addEventListener('click', function(){
+        const current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+        setTheme(current === 'light' ? 'dark' : 'light');
+      });
+    }
+  })();
+
   // Charts
   const months = <?php echo $monthsJson; ?>;
   const ordersPerMonth = <?php echo $ordersPerMonthJson; ?>;
@@ -795,6 +842,7 @@ $prev = ((int)$page) - 1;
   const deliveryValues = <?php echo $deliveryStatsJson; ?>;
 
   const statusColors = ['#f59e0b','#2563eb','#fb923c','#22c55e'];
+
 
   new Chart(document.getElementById('chartOrdersPerMonth'), {
     type: 'bar',

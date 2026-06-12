@@ -21,6 +21,7 @@ body{
   color:var(--text);
 }
 
+
 .skip-link{
   position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
 }
@@ -218,11 +219,61 @@ body{
 }
 
 /* Auth pages (Login/Register) */
+/*
+  NOTE: Auth pages should read clearly and feel "light".
+  We override the otherwise dark global theme for these specific pages.
+*/
 .auth-hero{
   padding:120px 0 70px;
 }
 
+/* Light theme for auth */
+.auth-hero{
+  background: radial-gradient(900px 500px at 20% 0%, rgba(245,158,11,.16), transparent 60%),
+              radial-gradient(700px 420px at 80% 10%, rgba(59,130,246,.14), transparent 60%),
+              linear-gradient(180deg, rgba(243,246,255,.98), rgba(243,246,255,.88));
+  color:#0a1a33;
+}
+
+.auth-hero .auth-panel,
+.auth-hero .auth-card{
+  background: rgba(255,255,255,.78) !important;
+  border:1px solid rgba(10,25,50,.10) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  color:#0a1a33 !important;
+}
+
+.auth-hero .auth-badge{
+  color: rgba(10,25,50,.92) !important;
+  background: rgba(245,158,11,.15) !important;
+  border-color: rgba(245,158,11,.25) !important;
+}
+
+.auth-hero .auth-badge span{font-weight:800;}
+
+.auth-hero .text-white-50{ color: rgba(10,25,50,.55) !important; }
+
+.auth-hero .auth-illustration{
+  background: rgba(255,255,255,.60) !important;
+  border-color: rgba(10,25,50,.10) !important;
+}
+
+.auth-hero svg{ filter: drop-shadow(0 18px 30px rgba(0,0,0,.08)); }
+
+/* Fix light theme for register.php text that uses Bootstrap's .text-white-50 class */
+.auth-hero .text-white-50{
+  color: rgba(10,25,50,.55) !important;
+}
+
+/* Fix for buttons/inputs that use bootstrap default "outline-light" (keeps them readable on light background) */
+.auth-hero .btn-outline-light{
+  color:#0a1a33 !important;
+  border-color: rgba(10,25,50,.18) !important;
+}
+
 .auth-card{
+
   background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.12);
   border-radius:20px;

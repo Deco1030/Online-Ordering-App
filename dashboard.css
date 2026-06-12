@@ -1,28 +1,106 @@
 /* Client Dashboard styles (Bootstrap 5 compatible) */
 
 :root{
+  /* Default: Dark theme */
   --dash-bg: #071427;
   --dash-bg2:#0b1f3a;
   --dash-card: rgba(255,255,255,.06);
   --dash-border: rgba(255,255,255,.12);
   --dash-text: #eaf2ff;
   --dash-muted: rgba(234,242,255,.7);
+  --dash-text-strong: #ffffff;
   --dash-accent: #f59e0b;
   --dash-blue: #2563eb;
   --dash-orange: #fb923c;
 }
 
-body{
-  color: var(--dash-text);
+/* Light theme overrides */
+html[data-theme="light"],
+body[data-theme="light"]{
+
+  --dash-bg: #f5f8ff;
+  --dash-bg2: #eef4ff;
+  --dash-card: rgba(10,25,50,.06);
+  --dash-border: rgba(10,25,50,.12);
+
+  /* Important: theme must control text colors too */
+  --dash-text: #0b1f3a;
+  --dash-muted: rgba(11,31,58,.72);
+  --dash-text-strong: #0a1a33;
+
+
+  /* Charts / widgets that hardcode light-on-dark need correction */
 }
 
-/* Ensure readable text on dark backgrounds (fix for low-contrast elements) */
-:root{
-  --dash-text-strong: #ffffff;
+/* Light theme: ensure “Order Activity” (chart box + its texts) uses dark text */
+html[data-theme="light"] .chart-box,
+body[data-theme="light"] .chart-box{
+  background: rgba(255,255,255,.75) !important;
+  border-color: rgba(10,25,50,.10) !important;
 }
+
+html[data-theme="light"] .chart-title,
+body[data-theme="light"] .chart-title{
+  color: rgba(10,25,50,.92) !important;
+}
+
+html[data-theme="light"] .chart-box *{
+  color: rgba(10,25,50,.92) !important;
+}
+
+
+
+body{
+  color: var(--dash-text);
+  /* Fix: toggle background too (was only text). */
+  background: radial-gradient(1200px 600px at 20% 0%, rgba(245,158,11,.18), transparent 55%),
+              radial-gradient(900px 500px at 80% 10%, rgba(59,130,246,.18), transparent 60%),
+              linear-gradient(180deg, var(--dash-bg), var(--dash-bg2));
+}
+
+/* Ensure the main page container also changes background with theme */
+.page-wrap,
+.main{
+  background: radial-gradient(900px 500px at 70% 10%, rgba(59,130,246,.12), transparent 60%),
+              radial-gradient(900px 500px at 10% 0%, rgba(245,158,11,.10), transparent 55%),
+              transparent;
+}
+
+html[data-theme="light"] .page-wrap,
+body[data-theme="light"] .page-wrap,
+html[data-theme="light"] .main,
+body[data-theme="light"] .main{
+  background: radial-gradient(900px 500px at 70% 10%, rgba(37,99,235,.12), transparent 60%),
+              radial-gradient(900px 500px at 10% 0%, rgba(245,158,11,.10), transparent 55%),
+              linear-gradient(180deg, var(--dash-bg), var(--dash-bg2));
+}
+
+/* Ensure light mode forms/cards stay readable (client_place_order.php issue) */
+html[data-theme="light"] .dashboard-card,
+body[data-theme="light"] .dashboard-card{
+  background: rgba(243,246,255,.82) !important;
+  border-color: rgba(10,25,50,.14) !important;
+}
+
+html[data-theme="light"] .form-control,
+body[data-theme="light"] .form-control,
+html[data-theme="light"] .form-select,
+body[data-theme="light"] .form-select{
+  color: var(--dash-text) !important;
+  background-color: rgba(255,255,255,.88) !important;
+  border-color: rgba(10,25,50,.16) !important;
+}
+
+html[data-theme="light"] .form-control::placeholder,
+body[data-theme="light"] .form-control::placeholder{
+  color: rgba(11,31,58,.45) !important;
+}
+
 
 /* Bootstrap “text-muted” can be too dark on some dark cards; override it here */
 .text-muted{ color: var(--dash-muted) !important; }
+
+
 
 /* Make sure form labels/inputs inherit proper light text */
 .form-label,
@@ -52,8 +130,16 @@ label{ color: var(--dash-text) !important; }
 /* Generic dark-page override: ensure anything inside our dashboard has readable text */
 .page-wrap, 
 .page-wrap *{
+  /* Use theme-aware strong text */
   color: var(--dash-text-strong) !important;
 }
+
+/* Light theme should not force white text from above */
+html[data-theme="light"] .page-wrap,
+html[data-theme="light"] .page-wrap *{
+  color: var(--dash-text-strong) !important;
+}
+
 
 /* Some elements/buttons may force black text; push them to light grey */
 .page-wrap .text-dark,
@@ -124,8 +210,16 @@ label{ color: var(--dash-text) !important; }
   flex: 0 0 255px;
   background: linear-gradient(180deg, rgba(14,37,71,.92), rgba(7,20,39,.92));
   border-right: 1px solid rgba(255,255,255,.08);
-  transition: width .18s ease, flex-basis .18s ease;
+  transition: width .18s ease, flex-basis .18s ease, background .18s ease, border-color .18s ease;
 }
+
+/* Light theme: make sidebar background light */
+html[data-theme="light"] .sidebar,
+body[data-theme="light"] .sidebar{
+  background: linear-gradient(180deg, rgba(243,246,255,.95), rgba(238,244,255,.92));
+  border-right: 1px solid rgba(10,25,50,.10);
+}
+
 
 .sidebar-inner{
   height: calc(100vh - 64px);
@@ -215,10 +309,11 @@ label{ color: var(--dash-text) !important; }
 
 .dashboard-card{
   background: var(--dash-card) !important;
-  border: 1px solid rgba(255,255,255,.10) !important;
+  border: 1px solid var(--dash-border) !important;
   border-radius: 18px !important;
   box-shadow: 0 18px 50px rgba(0,0,0,.10);
 }
+
 
 /* Stat cards */
 .stat-card-modern{

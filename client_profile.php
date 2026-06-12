@@ -245,6 +245,35 @@ $avatarFinal = $avatarUrl !== '' ? e($avatarUrl) : (e($basePath) . '/assets/avat
 </head>
 <body>
 
+<script>
+// Theme toggle sync for this page (reads the same localStorage key as client_dashboard.php)
+(function(){
+  const root = document.documentElement;
+  const body = document.body;
+
+  function setTheme(theme){
+    if(theme === 'light'){
+      root.setAttribute('data-theme','light');
+      body.setAttribute('data-theme','light');
+    } else {
+      root.removeAttribute('data-theme');
+      body.removeAttribute('data-theme');
+    }
+    try{ localStorage.setItem('otx_theme', theme); }catch(e){}
+  }
+
+  function getPreferredTheme(){
+    try{
+      const saved = localStorage.getItem('otx_theme');
+      if(saved === 'light' || saved === 'dark') return saved;
+    }catch(e){}
+    return (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+  }
+
+  setTheme(getPreferredTheme());
+})();
+</script>
+
 <nav class="topbar navbar navbar-dark fixed-top" aria-label="Client dashboard top navigation" id="clientTopbar">
   <div class="container-fluid px-3">
     <button class="btn btn-ghost text-white d-inline-flex align-items-center me-2" type="button" id="sidebarToggle" aria-label="Toggle sidebar">

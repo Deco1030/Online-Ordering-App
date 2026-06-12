@@ -1,0 +1,38 @@
+Plan: Redesign admin_dashboard.php into modern SaaS admin panel per requirements.
+
+1) Ensure security: keep Auth::requireRole(['admin']); use Security::e() for output; include CSRF token in HTML; avoid XSS in JS.
+2) Replace truncated HTML with full Bootstrap 5 layout:
+   - Fixed top navbar: logo, search, notifications dropdown, messages dropdown, profile dropdown (My Profile/Settings/Logout).
+   - Collapsible dark-blue sidebar with Bootstrap Icons and menu items (Dashboard, Order Management, Shipment Management, Tracking Updates, Clients, Services & Pricing, Invoices, Reports & Analytics, User Management, System Settings, Logout).
+   - Dark mode toggle (toggle body class and persist in localStorage).
+3) Add dashboard content sections:
+   - Welcome back + current date/time.
+   - Statistics overview cards for Orders/Shipments/Customers/Revenue (icons, counts, gradients, hover).
+   - Quick Actions cards.
+   - Recent Orders table with status colored badges and action buttons.
+   - Shipment tracking overview summary cards.
+   - Charts section with Chart.js canvases.
+   - Latest tracking updates timeline.
+   - Recent client registrations with View Profile buttons.
+   - Notifications center with unread badge.
+   - System activity feed timeline.
+   - Performance metrics progress bars.
+   - Reports export buttons.
+4) AJAX refresh + real-time updates:
+   - admin_dashboard.js: implement fetch from dashboard_data.php and dashboard_charts.php; show loading spinners; update DOM.
+   - Use GET for dashboard_data/charts; ensure no state changes.
+5) Backend endpoints:
+   - If dashboard_data.php/dashboard_charts.php already exist, verify their response shape matches DOM IDs/classes.
+   - Ensure they enforce admin role (already done).
+6) Styling:
+   - Extend admin_dashboard.css with dark mode variants and improved responsive behavior.
+   - Keep soft shadows, rounded cards, smooth hover/animations.
+
+Files to edit:
+- admin_dashboard.php (major HTML + wiring)
+- admin_dashboard.js (extend for AJAX refresh, dark mode)
+- admin_dashboard.css (add dark mode styles, adjust responsiveness)
+
+Deliverable:
+- Production-ready full admin_dashboard.php with integrated Bootstrap 5/Icons/Chart.js and AJAX.
+

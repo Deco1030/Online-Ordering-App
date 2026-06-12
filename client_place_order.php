@@ -592,7 +592,37 @@ unset($_SESSION['flash_success'], $_SESSION['flash_error']);
 <script src="<?php echo e($basePath); ?>/script.js"></script>
 
 <script>
+// Theme toggle + persistence for this page (syncs with client_dashboard.php)
 (function(){
+  const root = document.documentElement;
+  const body = document.body;
+
+  function setTheme(theme){
+    if(theme === 'light'){
+      root.setAttribute('data-theme','light');
+      body.setAttribute('data-theme','light');
+    } else {
+      root.removeAttribute('data-theme');
+      body.removeAttribute('data-theme');
+    }
+    try{ localStorage.setItem('otx_theme', theme); }catch(e){}
+  }
+
+  function getPreferredTheme(){
+    try{
+      const saved = localStorage.getItem('otx_theme');
+      if(saved === 'light' || saved === 'dark') return saved;
+    }catch(e){}
+    return (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+  }
+
+  setTheme(getPreferredTheme());
+})();
+</script>
+
+<script>
+(function(){
+
   // Shipping card -> service type sync
   const serviceSelect = document.getElementById('serviceType');
   const shippingCards = document.querySelectorAll('.shipping-card');

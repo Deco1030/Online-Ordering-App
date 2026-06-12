@@ -1,0 +1,163 @@
+/* Landing page light theme overrides */
+
+/*
+  Fix: landing page uses dark background styles from style.css.
+  Ensure text inside dark sections stays light for readability.
+*/
+.landing-fix,
+.landing-fix *{
+  color: rgba(234,242,255,.95) !important;
+  -webkit-text-fill-color: rgba(234,242,255,.95) !important;
+}
+
+
+.landing-fix .text-muted,
+.landing-fix .text-muted *{
+  color: rgba(234,242,255,.70) !important;
+}
+
+.landing-fix .bg-light,
+.landing-fix .bg-light *{
+  color: rgba(10,25,50,.95) !important;
+  -webkit-text-fill-color: rgba(10,25,50,.95) !important;
+}
+
+
+/* Navbar should be readable on light hero */
+.navbar{
+
+  background: rgba(255,255,255,.72) !important;
+  border-bottom: 1px solid rgba(10,25,50,.10);
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+.navbar .nav-link{
+  color: rgba(10,25,50,.78) !important;
+}
+.navbar .nav-link:hover{
+  color: rgba(10,25,50,.98) !important;
+}
+
+.navbar .btn-outline-light{
+  color:#0a1a33 !important;
+  border-color: rgba(10,25,50,.20) !important;
+}
+
+/* Make hero background light and ensure text isn't white */
+.hero{
+  background: radial-gradient(900px 500px at 20% 0%, rgba(245,158,11,.16), transparent 60%),
+              radial-gradient(700px 420px at 80% 10%, rgba(59,130,246,.14), transparent 60%),
+              linear-gradient(180deg, rgba(243,246,255,.98), rgba(243,246,255,.88));
+  color:#0a1a33 !important;
+}
+
+.hero .hero-badge,
+.hero .stat-card,
+.hero .feature-card,
+.hero .why-card,
+.hero .step,
+.hero .tracking-strip,
+.hero .cta-box,
+.hero .contact-card,
+.hero .company-card,
+.hero .testi-card{
+  background: rgba(255,255,255,.78) !important;
+  border-color: rgba(10,25,50,.10) !important;
+  color:#0a1a33 !important;
+}
+
+.hero .stat-label,
+.hero .text-muted,
+.hero .tracking-hint,
+.hero .tracking-title,
+.hero .section-heading p,
+.hero p.text-muted,
+.hero .small.text-muted,
+.hero .tracking-strip .text-muted{
+  color: rgba(10,25,50,.62) !important;
+}
+
+/* Fix any bootstrap white text used in markup */
+.hero .text-white,
+.hero .text-white-50,
+.hero .text-white-50 *{
+  color: rgba(10,25,50,.98) !important;
+}
+
+.hero .lead,
+.hero h1,
+.hero h2,
+.hero h3,
+.hero h4,
+.hero h5,
+.hero a{
+  color: inherit !important;
+}
+
+/* Section background remains readable */
+.section{ color:#0a1a33 !important; }
+
+.site-footer,
+.footer-link,
+.social{
+  color:#0a1a33 !important;
+}
+
+.site-footer{ color: rgba(10,25,50,.80) !important; }
+.footer-link{ color: rgba(10,25,50,.70) !important; }
+.footer-link:hover{ color:#0a1a33 !important; }
+.social{
+  border-color: rgba(10,25,50,.12) !important;
+  background: rgba(255,255,255,.55) !important;
+  color:#0a1a33 !important;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+}
+.social i,
+.social i::before{
+  color:#0a1a33 !important;
+}
+.social:hover{ border-color: rgba(245,158,11,.55) !important; }
+.social:hover i,
+.social:hover i::before{
+  color: rgba(245,158,11,.95) !important;
+}
+
+/* Pricing cards already light in style.css; keep text strong */
+.price-card, .price-card *{ color:#0a1a33 !important; }
+
+/* CTA block uses dark-ish gradient; force it to be readable too */
+.cta,
+.cta *{
+  color:#0a1a33 !important;
+}
+
+/* Light sections should stay dark for readability */
+.section.bg-light,
+.section.bg-light *{
+  color:#0a1a33 !important;
+  -webkit-text-fill-color:#0a1a33 !important;
+}
+
+/* Ensure light background cards/components inside landing are dark text */
+.bg-light,
+.bg-light *{
+  color:#0a1a33 !important;
+  -webkit-text-fill-color:#0a1a33 !important;
+}
+
+
+/* Footer is light anyway; keep it readable */
+.site-footer,
+.site-footer *{
+  color:rgba(10,25,50,.90) !important;
+}
+
+
+
+
+

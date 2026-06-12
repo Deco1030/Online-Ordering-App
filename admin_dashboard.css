@@ -1,0 +1,75 @@
+.admin-page{min-height:100vh}
+.admin-shell{display:flex;width:100%}
+.admin-sidebar{width:255px;flex:0 0 255px;background:linear-gradient(180deg,rgba(245,248,255,.98),rgba(235,241,255,.98));border-right:1px solid rgba(2,6,23,.10)}
+.admin-sidebar .sidebar-inner{height:100vh;overflow:auto;padding:14px}
+.admin-main{flex:1 1 auto;background:#fff}
+.admin-topbar-spacer{height:64px}
+.admin-content{padding:26px 22px 60px}
+.admin-page *{color:#0a1a33 !important}
+
+/* Sidebar needs explicit override in dark theme to avoid dark text */
+.theme-dark .admin-sidebar,
+.theme-dark .admin-sidebar *{
+  color:rgba(233,245,255,.92) !important;
+}
+
+/* Stronger: ensure nav links/text are not overridden by other rules */
+.theme-dark .admin-sidebar .nav-link,
+.theme-dark .admin-sidebar .nav-link *{
+  color:rgba(233,245,255,.92) !important;
+}
+
+.theme-dark .admin-sidebar .nav-link.active{
+  color:#fff !important;
+}
+
+
+.admin-card{background:#fff;border:1px solid rgba(2,6,23,.10);border-radius:18px;box-shadow:0 18px 50px rgba(2,6,23,.10)}
+.admin-muted{color:#52637a !important}
+.admin-stat{border-radius:18px;border:1px solid rgba(2,6,23,.08);padding:18px;box-shadow:0 18px 45px rgba(2,6,23,.06);background:linear-gradient(135deg,rgba(59,130,246,.10),rgba(245,158,11,.12));transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.admin-stat:hover{transform:translateY(-5px);border-color:rgba(245,158,11,.45);box-shadow:0 24px 60px rgba(2,6,23,.12)}
+.admin-stat .value{font-weight:950;font-size:26px;letter-spacing:-.02em}
+.admin-stat .label{font-weight:800;font-size:13px;color:#52637a}
+.admin-stat .icon-bubble{width:44px;height:44px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.85);border:1px solid rgba(2,6,23,.08)}
+.admin-topbar{position:fixed;top:0;left:0;right:0;z-index:1050;background:rgba(7,20,39,.72) !important;backdrop-filter:saturate(160%) blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+.admin-topbar .navbar-brand{color:#fff !important;font-weight:900}
+.admin-sidebar .sidebar-label{color:rgba(10,26,51,.7);font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin:10px 6px 8px}
+.admin-sidebar .nav-link{color:rgba(10,26,51,.86) !important;border-radius:14px;padding:10px 12px;margin:2px 6px;transition:transform .15s ease,background .15s ease,border-color .15s ease;border:1px solid transparent}
+.admin-sidebar .nav-link i{width:20px;text-align:center}
+.admin-sidebar .nav-link:hover{background:rgba(255,255,255,.08);transform:translateY(-1px);border-color:rgba(245,158,11,.35)}
+.admin-sidebar .nav-link.active{background:rgba(245,158,11,.18);border-color:rgba(245,158,11,.40);color:#fff !important}
+.admin-sidebar.is-collapsed{width:86px;flex-basis:86px}
+.admin-sidebar.is-collapsed .nav-text{display:none}
+.admin-sidebar.is-collapsed .sidebar-brand>div{display:none}
+.admin-sidebar .sidebar-brand{display:flex;align-items:center;gap:12px}
+.admin-sidebar .brand-mark-sm{width:44px;height:44px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:rgba(245,158,11,.16);border:1px solid rgba(245,158,11,.30)}
+.admin-table thead th{border-bottom:1px solid rgba(2,6,23,.08);color:rgba(10,26,51,.75);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+.admin-table tbody td{border-top:1px solid rgba(2,6,23,.06);color:rgba(10,26,51,.92)}
+.admin-status-pending{background:rgba(245,158,11,.14);color:#9a5800;border:1px solid rgba(245,158,11,.35)}
+.admin-status-processing{background:rgba(37,99,235,.14);color:#1f4da5;border:1px solid rgba(37,99,235,.35)}
+.admin-status-intransit{background:rgba(251,146,60,.14);color:#9a4700;border:1px solid rgba(251,146,60,.35)}
+.admin-status-delivered{background:rgba(34,197,94,.14);color:#0f6a2a;border:1px solid rgba(34,197,94,.35)}
+.admin-status-cancelled{background:rgba(239,68,68,.14);color:#b91c1c;border:1px solid rgba(239,68,68,.35)}
+.admin-timeline{list-style:none;padding-left:0;margin:0}
+.admin-timeline li{position:relative;padding-left:28px;padding-top:10px;padding-bottom:10px}
+.admin-timeline li:before{content:"";width:10px;height:10px;border-radius:50%;background:rgba(245,158,11,.30);border:1px solid rgba(245,158,11,.55);position:absolute;left:8px;top:18px}
+.admin-timeline li:after{content:"";position:absolute;left:12px;top:28px;height:calc(100% - 28px);width:1px;background:rgba(2,6,23,.08)}
+.admin-timeline li:last-child:after{display:none}
+.admin-chart-box{padding:16px;border-radius:16px;border:1px solid rgba(2,6,23,.08);background:#fff;box-shadow:0 16px 40px rgba(2,6,23,.06)}
+@media (max-width:991.98px){.admin-shell{flex-direction:column}.admin-sidebar{width:100%;flex:0 0 auto}.admin-main{min-height:calc(100vh - 0px)}}
+
+/* Dark mode (content area) */
+.theme-dark.admin-page{background:linear-gradient(180deg,rgba(7,20,39,.04),rgba(7,20,39,.08));}
+.theme-dark .admin-main{background:rgb(7 20 39 / 0.95) !important;}
+.theme-dark .admin-content{background:transparent;}
+.theme-dark .admin-card,
+.theme-dark .admin-chart-box{background:rgba(10,26,51,.96) !important;border-color:rgba(255,255,255,.10) !important;box-shadow:0 18px 50px rgba(0,0,0,.22) !important;}
+.theme-dark .admin-page *{color:rgba(233,245,255,.92) !important;}
+.theme-dark .admin-topbar .navbar-brand{color:#fff !important;}
+.theme-dark .admin-table thead th{color:rgba(233,245,255,.75) !important;}
+.theme-dark .admin-table tbody td{color:rgba(233,245,255,.92) !important;}
+.theme-dark .admin-muted{color:rgba(233,245,255,.68) !important;}
+.theme-dark .admin-timeline li:after{background:rgba(255,255,255,.10) !important;}
+.theme-dark .admin-timeline li:before{background:rgba(245,158,11,.26) !important;border-color:rgba(245,158,11,.62) !important;}
+
+
